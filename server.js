@@ -74,15 +74,39 @@ app.post("/abandon", (req, res) => {
   res.json({ message: "❌ Abandon enregistré" });
 });
 
-app.get("/telecharger", (req, res) => {
+// Route générique pour télécharger un fichier parmi les 3 autorisés
+app.get("/telecharger/:type", (req, res) => {
   const code = req.query.code;
   if (code !== Code) {
     return res.status(403).json({ message: "Code invalide" });
   }
-  if (!fs.existsSync(dataFilePath)) {
+
+  const type = req.params.type;
+  let filePath;
+  let fileName;
+
+  switch (type) {
+    case "donnees":
+      filePath = dataFilePath;
+      fileName = "donnees.json";
+      break;
+    case "heartbeat":
+      filePath = heartbeatFilePath;
+      fileName = "heartbeat.json";
+      break;
+    case "abandons":
+      filePath = abandonFilePath;
+      fileName = "abandons.json";
+      break;
+    default:
+      return res.status(404).json({ message: "Type de fichier non supporté" });
+  }
+
+  if (!fs.existsSync(filePath)) {
     return res.status(404).json({ message: "Fichier non trouvé" });
   }
-  res.download(dataFilePath, "donnees.json", (err) => {
+
+  res.download(filePath, fileName, (err) => {
     if (err) {
       console.error("Erreur téléchargement :", err);
       res.status(500).end();
@@ -93,3 +117,4 @@ app.get("/telecharger", (req, res) => {
 app.listen(port, () => {
   console.log(`🚀 Serveur actif sur http://localhost:${port}`);
 });
+

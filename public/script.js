@@ -1,5 +1,3 @@
-// script.js
-
 let sessionId = crypto.randomUUID();
 let startTime = Date.now();
 
@@ -30,12 +28,12 @@ window.addEventListener("beforeunload", () => {
 });
 
 // Envoi du questionnaire
-
 document.getElementById("btnEnvoyer").addEventListener("click", () => {
   const data = {
     sessionId,
     startTime,
     endTime: Date.now(),
+    dateSoumission: new Date().toISOString(),
     parcours: document.getElementById("parcours").value,
     annee: document.getElementById("annee").value,
     asso: document.getElementById("asso").value,
@@ -57,14 +55,15 @@ document.getElementById("btnEnvoyer").addEventListener("click", () => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   })
-    .then(response => {
-      if (!response.ok) throw new Error("Erreur lors de l'envoi");
-      return response.json();
-    })
-    .then(result => {
-      alert("Questionnaire bien envoyé !");
-    })
-    .catch(error => {
-      alert("Erreur : " + error.message);
-    });
+  .then(response => {
+    if (!response.ok) throw new Error("Erreur lors de l'envoi");
+    return response.json();
+  })
+  .then(result => {
+    alert("Questionnaire bien envoyé !");
+  })
+  .catch(error => {
+    alert("Erreur : " + error.message);
+  });
 });
+

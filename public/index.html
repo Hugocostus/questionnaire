@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Questionnaire vie associative</title>
+</head>
+<body>
+
+  <h2>Questionnaire</h2>
+
+  <!-- 1. Parcours -->
+  <label for="parcours">Quel parcours as-tu choisi ?</label><br>
+  <select id="parcours" required>
+    <option value="">-- Sélectionne un parcours --</option>
+    <option>Prépa - Parcours fast track</option>
+    <option>Prépa - Parcours asso</option>
+    <option>AST - Parcours Asso</option>
+    <option>AST - Parcours Classique</option>
+  </select>
+
+  <br><br>
+
+  <!-- 2. Année -->
+  <label for="annee">Ton année :</label><br>
+  <select id="annee" required>
+    <option value="">-- Sélectionne ton année --</option>
+    <option>1A</option>
+    <option>2A</option>
+    <option>3A</option>
+    <option>4A</option>
+  </select>
+
+  <br><br>
+
+  <!-- 3. Association -->
+  <label for="asso">Es-tu ou veux-tu être dans une asso ?</label><br>
+  <select id="asso" required>
+    <option value="">-- Sélectionne une réponse --</option>
+    <option>Oui, j’y suis</option>
+    <option>Oui, je veux coopter</option>
+    <option>Non</option>
+  </select>
+
+  <br><br>
+
+  <!-- 4. Pourquoi s'engager (question ouverte) -->
+  <label for="pourquoi">Si oui, pourquoi t’engages-tu dans une association ?</label><br>
+  <textarea id="pourquoi" rows="4" cols="50" placeholder="Exprime-toi librement..."></textarea>
+
+  <br><br>
+
+  <!-- 5. Nombre d’événements -->
+  <label for="frequence">À combien d’événements environ participes-tu par mois ?</label><br>
+  <select id="frequence" required>
+    <option value="">-- Choisis une fourchette --</option>
+    <option>Entre 0 et 5</option>
+    <option>Entre 5 et 10</option>
+    <option>Plus de 10</option>
+  </select>
+
+  <br><br>
+
+  <!-- 6. Échelle d’investissement -->
+  <label for="investissement">Sur une échelle de 1 à 5, à quel point te sens-tu investi.e dans la vie associative ?</label><br>
+  <input type="range" id="investissement" min="1" max="5" value="3">
+
+  <br><br>
+
+  <!-- 7. Liste ? -->
+  <label for="liste">As-tu listé ?</label><br>
+  <select id="liste" required>
+    <option value="">-- Sélectionne --</option>
+    <option>Oui</option>
+    <option>Non</option>
+  </select>
+
+  <br><br>
+
+  <!-- 8. Type d'événements -->
+  <label for="evenements">Quels types d’événements préfères-tu ?</label><br>
+  <select id="evenements" required>
+    <option value="">-- Choisis un type --</option>
+    <option>Gros events festifs</option>
+    <option>Événements axés pro</option>
+    <option>Petits events cosy</option>
+  </select>
+
+  <br><br>
+
+  <!-- 9. Baguette magique -->
+  <label for="magie">Si tu avais une baguette magique, que changerais-tu à la vie associative ?</label><br>
+  <textarea id="magie" rows="4" cols="50" placeholder="Exprime-toi librement..."></textarea>
+
+  <br><br>
+
+  <button id="btnEnvoyer">Envoyer le questionnaire</button>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -17,7 +17,7 @@ document.getElementById("btnEnvoyer").addEventListener("click", () => {
     return;
   }
 
-  fetch("https://questionnaire.onrender.com/enregistrer", {
+  fetch("https://questionnaire-65ht.onrender.com/enregistrer", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)

@@ -1,5 +1,41 @@
+// script.js
+
+let sessionId = crypto.randomUUID();
+let startTime = Date.now();
+
+// Envoyer un signal de vie toutes les 10 secondes
+setInterval(() => {
+  fetch("https://questionnaire-65ht.onrender.com/heartbeat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      sessionId,
+      timestamp: Date.now(),
+    })
+  });
+}, 10000);
+
+// Signaler un abandon lors du départ
+window.addEventListener("beforeunload", () => {
+  fetch("https://questionnaire-65ht.onrender.com/abandon", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    keepalive: true,
+    body: JSON.stringify({
+      sessionId,
+      startTime,
+      endTime: Date.now(),
+    })
+  });
+});
+
+// Envoi du questionnaire
+
 document.getElementById("btnEnvoyer").addEventListener("click", () => {
   const data = {
+    sessionId,
+    startTime,
+    endTime: Date.now(),
     parcours: document.getElementById("parcours").value,
     annee: document.getElementById("annee").value,
     asso: document.getElementById("asso").value,
@@ -11,7 +47,6 @@ document.getElementById("btnEnvoyer").addEventListener("click", () => {
     baguette: document.getElementById("magie").value.trim()
   };
 
-  // Validation simple
   if (!data.parcours || !data.annee || !data.asso || !data.frequence || !data.investissement || !data.liste || !data.evenements) {
     alert("Merci de remplir tous les champs obligatoires.");
     return;
@@ -28,7 +63,6 @@ document.getElementById("btnEnvoyer").addEventListener("click", () => {
     })
     .then(result => {
       alert("Questionnaire bien envoyé !");
-      console.log(result);
     })
     .catch(error => {
       alert("Erreur : " + error.message);

@@ -15,9 +15,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Code secret depuis variable d'environnement
-const secretCode = process.env.SECRET_CODE;
-if (!secretCode) {
-  console.error("❌ SECRET_CODE non défini dans l'environnement");
+const Code = process.env.CODE;
+if (!Code) {
+  console.error("❌ CODE non défini dans l'environnement");
   process.exit(1);
 }
 
@@ -56,7 +56,7 @@ app.post("/enregistrer", (req, res) => {
 // Téléchargement sécurisé
 app.get("/telecharger", (req, res) => {
   const code = req.query.code;
-  if (code !== secretCode) {
+  if (code !== Code) {
     return res.status(403).json({ message: "Code invalide" });
   }
 

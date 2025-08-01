@@ -67,6 +67,7 @@ app.post("/heartbeat", (req, res) => {
 
 // Enregistrement abandon
 app.post("/abandon", (req, res) => {
+  console.log("Reçu abandon :", req.body); // Debug reçu
   const { sessionId, startTime, endTime } = req.body;
   if (!sessionId || !startTime || !endTime) {
     return res.status(400).json({ message: "Paramètres manquants pour abandon" });
@@ -121,5 +122,3 @@ app.get("/telecharger/:type", (req, res) => {
 app.listen(port, () => {
   console.log(`🚀 Serveur actif sur http://localhost:${port}`);
 });
-
-

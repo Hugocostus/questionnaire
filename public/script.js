@@ -1,5 +1,6 @@
 let sessionId = crypto.randomUUID();
 let startTime = Date.now();
+let submitted = false; // Ajout d'un flag pour savoir si soumis
 
 // Envoyer un signal de vie toutes les 10 secondes
 setInterval(() => {
@@ -13,29 +14,22 @@ setInterval(() => {
   });
 }, 10000);
 
-// Signaler un abandon lors du départ
-window.addEventListener("beforeunload", () => {
-  const endTime = Date.now();
-  fetch("https://questionnaire-65ht.onrender.com/abandon", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    keepalive: true,
-    body: JSON.stringify({
-      sessionId,
-      startTime,
-      endTime,
-      timestamp: endTime // pour compatibilité avec le serveur
-    })
-  });
+// Signaler un abandon lors du départ, sauf si soumis
+window.addEventListener("beforeunload", (event) => {
+  if (submitted) return;  // On ne signale pas d'abandon si soumis
+  navigator.sendBeacon("https://questionnaire-65ht.onrender.com/abandon", JSON.stringify({
+    sessionId,
+    startTime,
+    endTime: Date.now(),
+  }));
 });
 
 // Envoi du questionnaire
 document.getElementById("btnEnvoyer").addEventListener("click", () => {
-  const endTime = Date.now();
   const data = {
     sessionId,
     startTime,
-    endTime,
+    endTime: Date.now(),
     dateSoumission: new Date().toISOString(),
     parcours: document.getElementById("parcours").value,
     annee: document.getElementById("annee").value,
@@ -60,13 +54,10 @@ document.getElementById("btnEnvoyer").addEventListener("click", () => {
   })
   .then(response => {
     if (!response.ok) throw new Error("Erreur lors de l'envoi");
-    return response.json();
-  })
-  .then(result => {
+    submitted = true;  // Marquer comme soumis ici
     alert("Questionnaire bien envoyé !");
   })
   .catch(error => {
     alert("Erreur : " + error.message);
   });
 });
-

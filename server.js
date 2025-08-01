@@ -33,6 +33,7 @@ function ecrireFichier(filePath, donnees) {
   fs.writeFileSync(filePath, JSON.stringify(donnees, null, 2));
 }
 
+// Enregistrement questionnaire complet
 app.post("/enregistrer", (req, res) => {
   const nouvelleDonnee = req.body;
   if (!nouvelleDonnee) {
@@ -52,6 +53,7 @@ app.post("/enregistrer", (req, res) => {
   res.json({ message: "Donnée enregistrée avec succès", total: donneesExistantes.length });
 });
 
+// Enregistrement heartbeat
 app.post("/heartbeat", (req, res) => {
   const { sessionId, timestamp } = req.body;
   if (!sessionId || !timestamp) {
@@ -63,18 +65,20 @@ app.post("/heartbeat", (req, res) => {
   res.json({ message: "⏱️ Heartbeat enregistré" });
 });
 
+// Enregistrement abandon
 app.post("/abandon", (req, res) => {
-  const { sessionId, timestamp } = req.body;
-  if (!sessionId || !timestamp) {
-    return res.status(400).json({ message: "Paramètres manquants" });
+  const { sessionId, startTime, endTime } = req.body;
+  if (!sessionId || !startTime || !endTime) {
+    return res.status(400).json({ message: "Paramètres manquants pour abandon" });
   }
   const data = lireFichier(abandonFilePath);
-  data.push({ sessionId, timestamp });
+  data.push({ sessionId, startTime, endTime });
   ecrireFichier(abandonFilePath, data);
+  console.log(`❌ Abandon enregistré : ${sessionId} (${(endTime - startTime) / 1000}s)`);
   res.json({ message: "❌ Abandon enregistré" });
 });
 
-// Route générique pour télécharger un fichier parmi les 3 autorisés
+// Téléchargement sécurisé des fichiers
 app.get("/telecharger/:type", (req, res) => {
   const code = req.query.code;
   if (code !== Code) {
@@ -117,4 +121,5 @@ app.get("/telecharger/:type", (req, res) => {
 app.listen(port, () => {
   console.log(`🚀 Serveur actif sur http://localhost:${port}`);
 });
+
 

@@ -15,6 +15,7 @@ setInterval(() => {
 
 // Signaler un abandon lors du départ
 window.addEventListener("beforeunload", () => {
+  const endTime = Date.now();
   fetch("https://questionnaire-65ht.onrender.com/abandon", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -22,17 +23,19 @@ window.addEventListener("beforeunload", () => {
     body: JSON.stringify({
       sessionId,
       startTime,
-      endTime: Date.now(),
+      endTime,
+      timestamp: endTime // pour compatibilité avec le serveur
     })
   });
 });
 
 // Envoi du questionnaire
 document.getElementById("btnEnvoyer").addEventListener("click", () => {
+  const endTime = Date.now();
   const data = {
     sessionId,
     startTime,
-    endTime: Date.now(),
+    endTime,
     dateSoumission: new Date().toISOString(),
     parcours: document.getElementById("parcours").value,
     annee: document.getElementById("annee").value,

@@ -10,7 +10,7 @@
 
   <!-- 1. Parcours -->
   <label for="parcours">Quel parcours as-tu choisi ?</label><br>
-  <select id="parcours" required>
+  <select id="parcours">
     <option value="">-- Sélectionne un parcours --</option>
     <option>Prépa - Parcours fast track</option>
     <option>Prépa - Parcours asso</option>
@@ -22,7 +22,7 @@
 
   <!-- 2. Année -->
   <label for="annee">Ton année :</label><br>
-  <select id="annee" required>
+  <select id="annee">
     <option value="">-- Sélectionne ton année --</option>
     <option>1A</option>
     <option>2A</option>
@@ -34,7 +34,7 @@
 
   <!-- 3. Association -->
   <label for="asso">Es-tu ou veux-tu être dans une asso ?</label><br>
-  <select id="asso" required>
+  <select id="asso">
     <option value="">-- Sélectionne une réponse --</option>
     <option>Oui, j’y suis</option>
     <option>Oui, je veux coopter</option>
@@ -43,7 +43,7 @@
 
   <br><br>
 
-  <!-- 4. Pourquoi s'engager (question ouverte) -->
+  <!-- 4. Pourquoi s'engager -->
   <label for="pourquoi">Si oui, pourquoi t’engages-tu dans une association ?</label><br>
   <textarea id="pourquoi" rows="4" cols="50" placeholder="Exprime-toi librement..."></textarea>
 
@@ -51,7 +51,7 @@
 
   <!-- 5. Nombre d’événements -->
   <label for="frequence">À combien d’événements environ participes-tu par mois ?</label><br>
-  <select id="frequence" required>
+  <select id="frequence">
     <option value="">-- Choisis une fourchette --</option>
     <option>Entre 0 et 5</option>
     <option>Entre 5 et 10</option>
@@ -68,7 +68,7 @@
 
   <!-- 7. Liste ? -->
   <label for="liste">As-tu listé ?</label><br>
-  <select id="liste" required>
+  <select id="liste">
     <option value="">-- Sélectionne --</option>
     <option>Oui</option>
     <option>Non</option>
@@ -78,7 +78,7 @@
 
   <!-- 8. Type d'événements -->
   <label for="evenements">Quels types d’événements préfères-tu ?</label><br>
-  <select id="evenements" required>
+  <select id="evenements">
     <option value="">-- Choisis un type --</option>
     <option>Gros events festifs</option>
     <option>Événements axés pro</option>
@@ -93,9 +93,16 @@
 
   <br><br>
 
+  <!-- 10. Axes d’amélioration -->
+  <label for="axes">À la suite de l’année associative 2024-2025, avez-vous des axes d’amélioration pour le nouveau mandat Corpo ?</label><br>
+  <textarea id="axes" rows="4" cols="50" placeholder="Partage tes idées..."></textarea>
+
+  <br><br>
+
   <button id="btnEnvoyer">Envoyer le questionnaire</button>
 
   <script src="script.js"></script>
 
 </body>
 </html>
+

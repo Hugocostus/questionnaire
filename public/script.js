@@ -1,6 +1,6 @@
 let sessionId = crypto.randomUUID();
 let startTime = Date.now();
-let submitted = false; // Flag pour savoir si le questionnaire est soumis
+let submitted = false;
 
 // Envoi heartbeat toutes les 10 sec
 setInterval(() => {
@@ -16,7 +16,7 @@ setInterval(() => {
 
 // Signaler abandon si page fermée sans soumission
 window.addEventListener("beforeunload", (event) => {
-  if (submitted) return; // Pas d’abandon si questionnaire soumis
+  if (submitted) return;
 
   const data = JSON.stringify({
     sessionId,
@@ -24,8 +24,6 @@ window.addEventListener("beforeunload", (event) => {
     endTime: Date.now(),
   });
 
-  // navigator.sendBeacon attend un Blob ou un FormData pour header application/octet-stream par défaut
-  // donc on force un Blob JSON avec type application/json pour que le serveur comprenne
   const blob = new Blob([data], { type: "application/json" });
   navigator.sendBeacon("https://questionnaire-65ht.onrender.com/abandon", blob);
 });
@@ -46,20 +44,8 @@ document.getElementById("btnEnvoyer").addEventListener("click", () => {
     liste: document.getElementById("liste").value,
     evenements: document.getElementById("evenements").value,
     baguette: document.getElementById("magie").value.trim(),
+    axes: document.getElementById("axes").value.trim(), // ✅ nouvelle question
   };
-
-  if (
-    !data.parcours ||
-    !data.annee ||
-    !data.asso ||
-    !data.frequence ||
-    !data.investissement ||
-    !data.liste ||
-    !data.evenements
-  ) {
-    alert("Merci de remplir tous les champs obligatoires.");
-    return;
-  }
 
   fetch("https://questionnaire-65ht.onrender.com/enregistrer", {
     method: "POST",
@@ -68,7 +54,7 @@ document.getElementById("btnEnvoyer").addEventListener("click", () => {
   })
     .then((response) => {
       if (!response.ok) throw new Error("Erreur lors de l'envoi");
-      submitted = true; // Marquer comme soumis
+      submitted = true;
       alert("Questionnaire bien envoyé !");
     })
     .catch((error) => {

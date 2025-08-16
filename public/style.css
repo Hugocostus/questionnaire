@@ -1,0 +1,112 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background: #0d1b2a; /* Bleu marine */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* centre verticalement */
+  align-items: center;     /* centre horizontalement */
+}
+
+/* Wrapper pour centrer le contenu */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
+}
+
+/* Logo Corpo */
+.logo {
+  max-width: 150px;
+  margin-bottom: 20px;
+}
+
+/* Container du formulaire */
+.container {
+  background: #fff;
+  border: 3px solid #FFD700; /* Jaune */
+  border-radius: 15px;
+  padding: 30px;
+  width: 100%;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+/* Titre */
+h2 {
+  color: #0d1b2a;
+  margin-bottom: 25px;
+}
+
+/* Labels */
+label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* Inputs & Selects */
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+select:focus,
+textarea:focus {
+  border-color: #FFD700;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255,215,0,0.5);
+}
+
+/* Range slider */
+input[type="range"] {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Textareas */
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Bouton */
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #FFD700;
+  border: none;
+  border-radius: 8px;
+  color: #0d1b2a;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #e6c200;
+}
+
+button:active {
+  transform: scale(0.98);
+}

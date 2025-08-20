@@ -10,8 +10,8 @@ body {
   background: #0d1b2a; /* Bleu marine */
   min-height: 100vh;
   display: flex;
-  justify-content: center; /* centre verticalement */
-  align-items: center;     /* centre horizontalement */
+  justify-content: center;  /* centre horizontalement */
+  align-items: center;      /* centre verticalement */
 }
 
 /* Wrapper pour centrer le contenu */
@@ -38,23 +38,25 @@ body {
   padding: 30px;
   width: 100%;
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  text-align: center;
+  text-align: center; /* ✅ Tout centrer */
 }
 
 /* Titre */
 h2 {
   color: #0d1b2a;
   margin-bottom: 25px;
+  text-align: center;
 }
 
 /* Labels */
 label {
   display: block;
-  text-align: left;
+  text-align: center; /* ✅ centrage */
   font-weight: bold;
   margin-top: 15px;
   margin-bottom: 5px;
   color: #333;
+  width: 100%;
 }
 
 /* Inputs & Selects */
@@ -79,6 +81,32 @@ textarea:focus {
 /* Range slider */
 input[type="range"] {
   width: 100%;
+  margin-top: 10px;
+}
+
+/* Labels pour le slider (1 à 5) */
+.slider-container {
+  width: 80%;
+  max-width: 400px;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFD700; /* Jaune cohérent avec le thème */
+}
+
+/* Groupe de checkboxes centré */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ✅ centre chaque ligne */
+  gap: 10px;
   margin-top: 10px;
 }
 
@@ -110,3 +138,4 @@ button:hover {
 button:active {
   transform: scale(0.98);
 }
+

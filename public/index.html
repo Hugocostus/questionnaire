@@ -21,9 +21,9 @@
       <select id="parcours">
         <option value="">-- Sélectionne un parcours --</option>
         <option>Prépa - Parcours fast track</option>
-        <option>Prépa - Parcours asso</option>
-        <option>AST - Parcours Asso</option>
-        <option>AST - Parcours Classique</option>
+        <option>Prépa - Parcours asso/aménagé</option>
+        <option>AST - Parcours asso/aménagé</option>
+        <option>AST - Parcours classique</option>
       </select>
     </div>
 
@@ -38,12 +38,7 @@
       </select>
     </div>
 
-    <div class="question">
-      <label for="axes">À la suite de l'année associative 2024-2025, avez-vous des axes d'amélioration pour le nouveau mandat Corpo ?</label>
-      <textarea id="axes" placeholder="Vos suggestions..."></textarea>
-    </div>
 
-    <!-- Ajouter ici les autres questions avec le même pattern -->
     <div class="question">
       <label for="asso">Es-tu ou veux-tu être dans une asso ?</label>
       <select id="asso">
@@ -69,9 +64,19 @@
       </select>
     </div>
 
+    <!-- Slider avec chiffres au-dessus -->
     <div class="question">
       <label for="investissement">Sur une échelle de 1 à 5, à quel point te sens-tu investi.e dans la vie associative ?</label>
-      <input type="range" id="investissement" min="1" max="5" value="3">
+      <div class="slider-container">
+        <div class="slider-labels">
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+        </div>
+        <input type="range" id="investissement" min="1" max="5" value="3">
+      </div>
     </div>
 
     <div class="question">
@@ -83,26 +88,26 @@
       </select>
     </div>
 
-    <div class="question">
-      <label for="evenements">Quels types d’événements préfères-tu ?</label>
-      <select id="evenements">
-        <option value="">-- Choisis un type --</option>
-        <option>Gros events festifs</option>
-        <option>Événements axés pro</option>
-        <option>Petits events cosy</option>
-      </select>
-    </div>
-
-    <div class="question">
-      <label for="magie">Si tu avais une baguette magique, que changerais-tu à la vie associative ?</label>
-      <textarea id="magie" placeholder="Exprime-toi librement..."></textarea>
-    </div>
-
-    <button id="btnEnvoyer">Envoyer le questionnaire</button>
+<div class="question">
+  <label>Quels types d’événements préfères-tu ?</label>
+  <div class="checkbox-group">
+    <label><input type="checkbox" name="evenements" value="Gros events festifs"> Gros events festifs</label>
+    <label><input type="checkbox" name="evenements" value="Événements axés pro"> Événements axés pro</label>
+    <label><input type="checkbox" name="evenements" value="Petits events cosy"> Petits events cosy</label>
   </div>
 </div>
 
+    <div class="question">
+      <label for="magie">Qu'attends tu de la vie associative ?</label>
+      <textarea id="magie" placeholder="Exprime-toi librement..."></textarea>
+    </div>
+      <div class="question">
+        <label for="axes">À la suite de l'année associative 2024-2025, as tu  des axes d'amélioration pour le nouveau mandat Corpo ?</label>
+        <textarea id="axes" placeholder="tes suggestions..."></textarea>
+    </div>
+    <button id="btnEnvoyer">Envoyer le questionnaire</button>
+  </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
-

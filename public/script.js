@@ -30,22 +30,27 @@ window.addEventListener("beforeunload", (event) => {
 
 // Envoi du questionnaire
 document.getElementById("btnEnvoyer").addEventListener("click", () => {
+  // Récupération des choix multiples pour "evenements"
+  const evenements = Array.from(
+    document.querySelectorAll('input[name="evenements"]:checked')
+  ).map(el => el.value);
+
   const data = {
-    sessionId,
-    startTime,
-    endTime: Date.now(),
-    dateSoumission: new Date().toISOString(),
-    parcours: document.getElementById("parcours").value,
-    annee: document.getElementById("annee").value,
-    asso: document.getElementById("asso").value,
-    pourquoi: document.getElementById("pourquoi").value.trim(),
-    frequence: document.getElementById("frequence").value,
-    investissement: document.getElementById("investissement").value,
-    liste: document.getElementById("liste").value,
-    evenements: document.getElementById("evenements").value,
-    baguette: document.getElementById("magie").value.trim(),
-    axes: document.getElementById("axes").value.trim(), // ✅ nouvelle question
-  };
+  sessionId,
+  startTime,
+  endTime: Date.now(),
+  dateSoumission: new Date().toISOString(),
+  parcours: document.getElementById("parcours").value,
+  annee: document.getElementById("annee").value,
+  asso: document.getElementById("asso").value,
+  pourquoi: document.getElementById("pourquoi").value.trim(),
+  frequence: document.getElementById("frequence").value,
+  investissement: document.getElementById("investissement").value,
+  liste: document.getElementById("liste").value,
+  evenements: evenements, // tableau des réponses sélectionnées
+  magie: document.getElementById("magie").value.trim(), // ✅ renommé correctement
+  axes: document.getElementById("axes").value.trim(), 
+};
 
   fetch("https://questionnaire-65ht.onrender.com/enregistrer", {
     method: "POST",
